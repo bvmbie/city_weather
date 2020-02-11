@@ -1,0 +1,8 @@
+# executable file
+
+#!/usr/bin/env ruby
+
+require bundler/setup
+require "city_weather"
+
+CityWeather::CLI.new.call
