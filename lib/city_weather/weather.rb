@@ -7,6 +7,7 @@ class CityWeather::Weather
     binding.pry
     #doc.search("div.tb-scroll a").text
     #=> "AmsterdamNorth NicosiaAthensOsloBelgradeParisBerlinPodgoricaBernPragueBratislavaPristinaBrusselsReykjavikBucharestRigaBudapestRomeChișinăuSan MarinoCopenhagenSarajevoDouglasSkopjeDublinSofiaGibraltarStockholmHelsinkiTallinnKyivTbilisiLisbonTiranaLjubljanaVaduzLondonVallettaLuxembourgVatican CityMadridViennaMinskVilniusMonacoWarsawMoscowYerevanNicosiaZagreb"
+    # (?=[A-BD-LO-Z])|(?=North)|(?=Chișinău)|(?=Copenhagen)|(?=Madrid)|(?=Minsk)|(?=Monaco)|(?=Moscow)|(?<=Yerevan)
   end
   
   
