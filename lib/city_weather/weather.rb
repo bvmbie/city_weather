@@ -10,7 +10,7 @@ class CityWeather::Weather
    def self.temperatures
     doc = Nokogiri::HTML(open("https://www.timeanddate.com/weather/?continent=europe&low=c"))
     binding.pry
-    # temperatures = doc.search("td.rbi").text
+    # temperatures = doc.search("td.rbi").text.split(/(?<=C)/)
   end
   
   
