@@ -8,23 +8,21 @@ class CityWeather::CLI
   end
   
   def list_cities
-    puts "Temperatures and Weather in Capitals in Europe:"
-    puts "(As reported by timeanddate.com)"
+    puts "Capital cities:"
     cities = CityWeather::City.all
-    cities.each.with_index(1) {|city, i| puts "#{i}. #{city.name}"}
+    cities.each.with_index(1) {|city, i| puts "#{i}. #{city.name.join}"}
     puts " "
   end
   
   def more_info
-    input = nil
-
+    puts "Type index number to see the city's weather conditions. Type list to return to the main list or exit to leave the program."
+    
+    input = gets.strip
     while input != "exit"
-      puts "Which city's weather would you like to see? Type list to return to the main list or exit to leave the program."
-      input = gets.strip
-
       if input.to_i>0
         selected =  CityWeather::City.find_by_index(input.to_i - 1)
         if selected == nil
+          puts " "
           puts "Not sure what you meant. Please try again."
         else
           puts " "
@@ -40,6 +38,7 @@ class CityWeather::CLI
   end
 
   def goodbye
+    puts " "
     puts "See you later!"
   end
 end
