@@ -1,4 +1,4 @@
-class DailyDeal::CLI
+class CityWeather::CLI
 
   def call
     list_locations
