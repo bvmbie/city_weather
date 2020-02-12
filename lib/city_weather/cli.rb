@@ -12,33 +12,29 @@ class CityWeather::CLI
     cities = CityWeather::City.all
     cities.each.with_index(1) {|city, i| puts "#{i}. #{city.name.join}"}
     puts " "
+    more_info
   end
   
   def more_info
-    puts "Type index number to see the city's weather conditions. Type list to return to the main list or exit to leave the program."
+    input = nil
     
-    input = gets.strip
-    while input != "exit"
-      if input.to_i>0
-        selected =  CityWeather::City.find_by_index(input.to_i - 1)
-        if selected == nil
-          puts " "
-          puts "Not sure what you meant. Please try again."
-        else
-          puts " "
-          puts "The temperature in #{selected.name} is currently #{selected.temperature}"
-          puts " "
-        end
-      elsif input.downcase == "list"
-        list_cities
-      else
-        puts "Not sure what you meant. Please try again."
-      end
-    end 
-  end
+    puts "Which city's weather would you like to see?"
+    puts "To return to the main list type list or type exit to leave the program."
+    input = gets.strip.downcase 
+    
+    if input.to_i > 0
+      selected =  CityWeather::City.find_by_index(input.to_i - 1)
+      puts " "
+      puts "The temperature in #{selected.name.join} is currently #{selected.temperature.join}"
+      puts " "
+    elsif input == "list"
+      list_cities
+    end
+  end 
 
   def goodbye
     puts " "
     puts "See you later!"
   end
+  
 end
