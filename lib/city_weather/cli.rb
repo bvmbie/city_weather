@@ -1,34 +1,42 @@
 class CityWeather::CLI
 
   def call
-    list_locations
-    menu
+    CityWeather::Scraper.scrape_cities
+    list_cities
+    more_info
     goodbye
   end
-
-  def list_locations
-    puts "European capital cities:"
-    @cities = CityWeather::Weather.today
-    @cities.each.with_index(1) do |city, i|
-      puts "#{i}. #{city.location}"
-    end
+  
+  def list_cities
+    puts "Temperatures and Weather in Capitals in Europe:"
+    puts "(As reported by timeanddate.com)"
+    cities = CityWeather::City.all
+    cities.each.with_index(1) {|city, i| puts "#{i}. #{city.name}"}
+    puts " "
   end
-
-  def menu
+  
+  def more_info
     input = nil
-    while input != "exit"
-      puts "Enter the number of the city you'd like to see the weather of or type list to see the cities again or type exit:"
-      input = gets.strip.downcase
 
-      if input.to_i > 0
-        chosen = @cities[input.to_i-1]
-        puts "#{chosen.location} - #{chosen.temperature}"
-      elsif input == "list"
-        list_locations
+    while input != "exit"
+      puts "Which city's weather would you like to see? Type list to return to the main list or exit to leave the program."
+      input = gets.strip
+
+      if input.to_i>0
+        selected =  CityWeather::City.find_by_index(input.to_i - 1)
+        if selected == nil
+          puts "Not sure what you meant. Please try again."
+        else
+          puts " "
+          puts "The temperature in #{selected.name} is currently #{selected.temperature}"
+          puts " "
+        end
+      elsif input.downcase == "list"
+        list_cities
       else
-        puts "Not sure what you want, type list or exit."
+        puts "Not sure what you meant. Please try again."
       end
-    end
+    end 
   end
 
   def goodbye
