@@ -14,8 +14,8 @@ class CityWeather::CLI
     puts " "
   end
   
-   def more_info
-    input = nil
+  def more_info
+  input = nil
 
     while input != "exit"
       puts "Which city's weather would you like to see?"
@@ -24,18 +24,13 @@ class CityWeather::CLI
 
       if input.to_i>0
         selected =  CityWeather::City.find_by_index(input.to_i - 1)
-        if selected == nil
-          puts "Not sure what you meant. Please try again."
-        else
-          puts " "
-          puts "The temperature in #{selected.name.join} is currently #{selected.temperature.join}"
-          puts " "
-        end
+        puts " "
+        puts "The temperature in #{selected.name.join} is currently #{selected.temperature.join}"
+        puts " "
       elsif input == "list"
         list_cities
       end
     end 
-
   end
 
   def goodbye
